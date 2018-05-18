@@ -124,7 +124,11 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
+<<<<<<< HEAD
     displayPerson(person);
+=======
+    
+>>>>>>> f0a2d8d408ce6e520b9b2d454351c721d00ad27c
     break;
     case "family":
     // TODO: get person's family
