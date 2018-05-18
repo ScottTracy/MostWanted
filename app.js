@@ -27,6 +27,7 @@ function searchByTraits(people) {
     case "height":
       filteredPeople = searchByHeight(people);
       break;
+<<<<<<< HEAD
       case "weight":
       filteredPeople = searchByWeight(people);
       break;
@@ -42,6 +43,11 @@ function searchByTraits(people) {
       case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
+=======
+    case "weight":
+      filteredPeople = searchByWeight(people);
+      break;
+>>>>>>> d73c326b7f33d75d8cdfb8694e4d9f8e6ae6e667
     // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
