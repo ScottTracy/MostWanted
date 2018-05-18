@@ -7,7 +7,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-    // TODO: search by name
+    searchByName(people)
     break;
     case 'no':
     searchByTraits(people);
@@ -58,7 +58,7 @@ function searchByTraits(people) {
 function searchByFirstName(firstName, people){
 
   let newArray = people.filter(function (el){
-    if(el.firstName == firstName) {
+    if(el.firstName.toLowerCase() == firstName) {
       return true;
     }
   });
@@ -68,7 +68,7 @@ function searchByFirstName(firstName, people){
 function searchByLastName(lastName, people){
 
   let newArray = people.filter(function(el){
-    if(el.lastName == lastName){
+    if(el.lastName.toLowerCase() == lastName){
       return true;
     }
   });
@@ -124,7 +124,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -143,19 +143,18 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();;
+  
   var lastName = promptFor("What is the person's last name?", chars).toLowerCase();;
   let nameArray = searchByLastName(lastName, people);
-      if(lastNameArray.length === 1){
+      if(nameArray.length === 1){
       
-          return mainMenu(nameArray, people);
+          return mainMenu(nameArray[0], people);
       } 
       else{
+        var firstName = promptFor("What is the person's first name?", chars).toLowerCase();;
           nameArray = searchByFirstName(firstName, nameArray);
-          return mainMenu(nameArray, people);
+          return mainMenu(nameArray[0], people);
       } 
-
-
   // TODO: find the person using the name they entered
 
 }
@@ -170,8 +169,14 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  let personInfo = [];
+
+  for(let trait in person){
+  personInfo += trait;
+  personInfo += ": ";
+  personInfo += person[trait];
+  personInfo += " | ";
+}
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
@@ -193,3 +198,4 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
