@@ -20,7 +20,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.").toLowerCase();;
   let filteredPeople;
 
   switch(userSearchChoice) {
@@ -55,8 +55,29 @@ function searchByTraits(people) {
 
 }
 
+function searchByFirstName(firstName, people){
+
+  let newArray = people.filter(function (el){
+    if(el.firstName == firstName) {
+      return true;
+    }
+  });
+  return newArray;
+}
+
+function searchByLastName(lastName, people){
+
+  let newArray = people.filter(function(el){
+    if(el.lastName == lastName){
+      return true;
+    }
+  });
+  return newArray;
+}
+
+
 function searchByHeight(people){
-  let userInputHeight = prompt ("How tall is the person in cm?");
+  let userInputHeight = prompt("How tall is the person in cm?");
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -79,7 +100,7 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people){
-  let userInputEyeColor = prompt ("What is their eye color?");
+  let userInputEyeColor = prompt ("What is their eye color?").toLowerCase();;
 
   let newArray = people.filter(function (el) {
     if(el.eyecolor == userInputEyeColor) {
@@ -122,8 +143,18 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
+  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();;
+  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();;
+  let nameArray = searchByLastName(lastName, people);
+      if(lastNameArray.length === 1){
+      
+          return mainMenu(nameArray, people);
+      } 
+      else{
+          nameArray = searchByFirstName(firstName, nameArray);
+          return mainMenu(nameArray, people);
+      } 
+
 
   // TODO: find the person using the name they entered
 
