@@ -95,7 +95,6 @@ function searchByWeight(people) {
       return true;
     }
   });
-
   return newArray;
 }
 
@@ -123,22 +122,23 @@ function mainMenu(person, people){
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
+
     case "info":
-<<<<<<< HEAD
     displayPerson(person);
-=======
-    
->>>>>>> f0a2d8d408ce6e520b9b2d454351c721d00ad27c
     break;
+
     case "family":
     // TODO: get person's family
     break;
+
     case "descendants":
-    // TODO: get person's descendants
+    displayDescendants(person, people);
     break;
+
     case "restart":
     app(people); // restart
     break;
+
     case "quit":
     return; // stop execution
     default:
@@ -185,6 +185,28 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+function displayDescendants(person, people){
+  let newArray = people.filter(function(el){
+    
+      for(let parent in el.parents){
+        if(el.parents[parent] == person.id){
+        return true;
+        }
+      }
+  });
+    alert(displayPeople(newArray));
+return newArray;
+}
+
+function displayChildren(people){
+  let children = [];
+    for(let person in people){
+      children.push(person.firstName); 
+      children.push(person.lastName);
+    } 
+  }
+
+
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -202,4 +224,3 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-
