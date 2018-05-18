@@ -27,7 +27,6 @@ function searchByTraits(people) {
     case "height":
       filteredPeople = searchByHeight(people);
       break;
-<<<<<<< HEAD
       case "weight":
       filteredPeople = searchByWeight(people);
       break;
@@ -43,11 +42,6 @@ function searchByTraits(people) {
       case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
-=======
-    case "weight":
-      filteredPeople = searchByWeight(people);
-      break;
->>>>>>> d73c326b7f33d75d8cdfb8694e4d9f8e6ae6e667
     // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
@@ -61,6 +55,17 @@ function searchByTraits(people) {
 
 }
 
+function searchByHeight(people){
+  let userInputHeight = prompt ("How tall is the person in cm?");
+
+  let newArray = people.filter(function (el) {
+    if(el.height == userInputHeight) {
+      return true;
+    }
+  });
+return newArray;
+}
+
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
 
@@ -68,10 +73,20 @@ function searchByWeight(people) {
     if(el.weight == userInputWeight) {
       return true;
     }
-    // return true if el.height matches userInputHeight
   });
 
   return newArray;
+}
+
+function searchByEyeColor(people){
+  let userInputEyeColor = prompt ("What is their eye color?");
+
+  let newArray = people.filter(function (el) {
+    if(el.eyecolor == userInputEyeColor) {
+      return true;
+    }
+  });
+return newArray;
 }
 
 // Menu function to call once you find who you are looking for
