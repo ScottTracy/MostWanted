@@ -146,7 +146,7 @@ function searchByOccupation(people){
   let userInputOccupation = prompt ("What is their occupation?").toLowerCase();;
 
   let newArray = people.filter(function (el) {
-    if(el.eyecolor == userInputEyeColor) {
+    if(el.occupation == userInputOccupation) {
       return true;
     }
   });
