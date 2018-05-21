@@ -187,17 +187,38 @@ function displayPerson(person){
 }
 
 function displayDescendants(person, people){
-  let newArray = people.filter(function(el){
+  let totalDescendants = [];
+  let transferAmount = 0;
+  searchDescendants(person,people);
+  function searchDescendants(person,people){
+    let newArray = people.filter(function(el){
     
       for(let parent in el.parents){
         if(el.parents[parent] == person.id){
         return true;
         }
-      }
-  });
-    alert(displayPeople(newArray));
-return newArray;
+      }      
+    });
+    transferAmount += newArray.length;
+    addArraytoArray(totalDescendants,newArray);
+  }
+     
+  if (transferAmount > 0){
+    transferAmount = 0;
+    for(let descendant in totalDescendants){
+      searchDescendants(totalDescendants[descendant],people);
+    }
+  }
+  displayPeople(totalDescendants);
 }
+  
+function addArraytoArray(originalArray, adderArray){
+  for (let item in adderArray){
+    originalArray.push(adderArray[item]);
+  }
+}
+
+
 
 function displayChildren(people){
   let children = [];
