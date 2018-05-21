@@ -109,17 +109,6 @@ function searchByEyeColor(people){
 return newArray;
 }
 
-function searchByEyeColor(people){
-  let userInputEyeColor = prompt ("What is their eye color?").toLowerCase();;
-
-  let newArray = people.filter(function (el) {
-    if(el.eyecolor == userInputEyeColor) {
-      return true;
-    }
-  });
-return newArray;
-}
-
 function searchByGender(people){
   let userInputGender = prompt ("What is their gender?").toLowerCase();;
 
@@ -146,7 +135,7 @@ function searchByOccupation(people){
   let userInputOccupation = prompt ("What is their occupation?").toLowerCase();;
 
   let newArray = people.filter(function (el) {
-    if(el.eyecolor == userInputEyeColor) {
+    if(el.occupation == userInputOccupation) {
       return true;
     }
   });
