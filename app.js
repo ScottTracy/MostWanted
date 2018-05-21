@@ -236,13 +236,12 @@ function displayDescendants(person, people){
     transferAmount += newArray.length;
     addArraytoArray(totalDescendants,newArray);
   }
-     
   if (transferAmount > 0){
-    transferAmount = 0;
-    for(let descendant in totalDescendants){
-      searchDescendants(totalDescendants[descendant],people);
+      transferAmount = 0;
+      for(let descendant in totalDescendants){
+        searchDescendants(totalDescendants[descendant],people);
+      }
     }
-  }
   displayPeople(totalDescendants);
 }
   
@@ -337,3 +336,13 @@ function searchChildren(person,people){
   });
   return newArray;
   }
+function findParents(person,people){
+  let newArray = people.filter(function(el)){
+    for( let parent in el.parents) {
+      if (el.id == person.parents[parent]){
+        return true;
+      }
+    }
+
+  }
+}
