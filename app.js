@@ -109,6 +109,50 @@ function searchByEyeColor(people){
 return newArray;
 }
 
+function searchByEyeColor(people){
+  let userInputEyeColor = prompt ("What is their eye color?").toLowerCase();;
+
+  let newArray = people.filter(function (el) {
+    if(el.eyecolor == userInputEyeColor) {
+      return true;
+    }
+  });
+return newArray;
+}
+
+function searchByGender(people){
+  let userInputGender = prompt ("What is their gender?").toLowerCase();;
+
+  let newArray = people.filter(function (el) {
+    if(el.gender == userInputGender) {
+      return true;
+    }
+  });
+return newArray;
+}
+
+function searchByAge(people){
+  let userInputAge = prompt ("What is their age?").toLowerCase();;
+
+  let newArray = people.filter(function (el) {
+    if(el.age == userInputAge) {
+      return true;
+    }
+  });
+return newArray;
+}
+
+function searchByOccupation(people){
+  let userInputOccupation = prompt ("What is their occupation?").toLowerCase();;
+
+  let newArray = people.filter(function (el) {
+    if(el.eyecolor == userInputEyeColor) {
+      return true;
+    }
+  });
+return newArray;
+}
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -129,6 +173,7 @@ function mainMenu(person, people){
     break;
 
     case "family":
+    displayFamily(person, people);
     // TODO: get person's family
     break;
 
@@ -199,12 +244,58 @@ function displayDescendants(person, people){
 return newArray;
 }
 
+
+function displayFamily(person, people){
+  let newArray = people.filter(function(el){
+
+    for(let family in el.families){
+      if(el.families[family] == person.id){
+        return true;
+      }
+    }
+  });
+  alert(displayPeople(newArray));
+  return newArray;
+}
+
+function displayParent(people){
+  let parent = [];
+    for(let person in people){
+      parent.push(person.firstName); 
+      parent.push(person.lastName);
+    } 
+    alert(displayPeople(parent));
+    return parent;
+  }
+
+function displaySibling(people){
+  let sibling = [];
+    for(let person in people){
+      sibling.push(person.firstName); 
+      sibling.push(person.lastName);
+    } 
+    alert(displayPeople(sibling));
+    return sibling;
+  }
+
+function displaySpouse(people){
+  let spouse = [];
+    for(let person in people){
+      spouse.push(person.firstName); 
+      spouse.push(person.lastName);
+    } 
+    alert(displayPeople(spouse));
+    return spouse;
+  }
+
 function displayChildren(people){
   let children = [];
     for(let person in people){
       children.push(person.firstName); 
       children.push(person.lastName);
     } 
+    alert(displayPeople(children));
+    return children;
   }
 
 
