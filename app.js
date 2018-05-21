@@ -299,7 +299,7 @@ function displaySibling(people){
     return sibling;
   }
 
-function displaySpouse(people){
+function displaySpouse(person, people){
   let spouse = [];
     for(let person in people){
       spouse.push(person.firstName); 
@@ -337,3 +337,14 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+function searchChildren(person,people){
+  let newArray = people.filter(function(el){
+    
+    for(let parent in el.parents){
+      if(el.parents[parent] == person.id){
+        return true;
+      }
+    } 
+  });
+  return newArray;
+  }
