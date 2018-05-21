@@ -255,59 +255,14 @@ function addArraytoArray(originalArray, adderArray){
 
 
 function displayFamily(person, people){
-  let newArray = people.filter(function(el){
+ let family = [];
+ addArraytoArray(family, findParents(person,people));
+ addArraytoArray(family, findSiblings(person,people));
+ addArraytoArray(family, searchChildren(person,people));
+ family.push(findSpouse(person,people));
+ displayPeople(family);
 
-    for(let family in el.families){
-      if(el.families[family] == person.id){
-        return true;
-      }
-    }
-  });
-  alert(displayPeople(newArray));
-  return newArray;
 }
-
-function displayParent(people){
-  let parent = [];
-    for(let person in people){
-      parent.push(person.firstName); 
-      parent.push(person.lastName);
-    } 
-    alert(displayPeople(parent));
-    return parent;
-  }
-
-function displaySibling(people){
-  let sibling = [];
-    for(let person in people){
-      sibling.push(person.firstName); 
-      sibling.push(person.lastName);
-    } 
-    alert(displayPeople(sibling));
-    return sibling;
-  }
-
-function displaySpouse(person, people){
-  let spouse = [];
-    for(let person in people){
-      spouse.push(person.firstName); 
-      spouse.push(person.lastName);
-    } 
-    alert(displayPeople(spouse));
-    return spouse;
-  }
-
-function displayChildren(people){
-  let children = [];
-    for(let person in people){
-      children.push(person.firstName); 
-      children.push(person.lastName);
-    } 
-    alert(displayPeople(children));
-    return children;
-  }
-
-
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -337,12 +292,29 @@ function searchChildren(person,people){
   return newArray;
   }
 function findParents(person,people){
-  let newArray = people.filter(function(el)){
-    for( let parent in el.parents) {
+  let newArray = [];
+  newArray = people.filter(function(el){
+    for( let parent in person.parents) {
       if (el.id == person.parents[parent]){
         return true;
       }
     }
+  });
+  return newArray
+}
+function findSpouse(person,people){
+  return people.filter(function(el){
+    if (el.id === person.currentspouse){
+      return true;
+    }
 
+  });
+}
+function findSiblings(person,people){
+  parents = findParents(person,people)
+  for (let parent in parents){
+    siblingsArray = searchChildren(parent,people)
+    siblingsArray.remove[person]
+    return siblingsArray
   }
 }
