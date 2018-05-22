@@ -20,7 +20,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.").toLowerCase();;
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', or all traits.").toLowerCase();
   let filteredPeople;
 
   switch(userSearchChoice) {
@@ -42,6 +42,9 @@ function searchByTraits(people) {
       case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
+      case "all traits":
+      filteredPeople = searchByAllTraits(people);
+      break;
     // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
@@ -52,7 +55,6 @@ function searchByTraits(people) {
   let foundPerson = filteredPeople[0];
 
   mainMenu(foundPerson, people);
-
 }
 
 function searchByFirstName(firstName, people){
@@ -75,9 +77,8 @@ function searchByLastName(lastName, people){
   return newArray;
 }
 
-
 function searchByHeight(people){
-  let userInputHeight = prompt("How tall is the person in cm?");
+  let userInputHeight = prompt("How tall is the person in inches?");
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -136,6 +137,17 @@ function searchByOccupation(people){
 
   let newArray = people.filter(function (el) {
     if(el.occupation == userInputOccupation) {
+      return true;
+    }
+  });
+return newArray;
+}
+
+function searchByAllTraits(people){
+  let userInputAllTraits = prompt ("Please enter which traits to search by. Height, weight, eye color, gender, age, or occupation: ").toLowerCase();;
+
+  let newArray = people.filter(function (el) {
+    if(el.alltraits == userInputAllTraits) {
       return true;
     }
   });
@@ -236,13 +248,12 @@ function displayDescendants(person, people){
     transferAmount += newArray.length;
     addArraytoArray(totalDescendants,newArray);
   }
-     
   if (transferAmount > 0){
-    transferAmount = 0;
-    for(let descendant in totalDescendants){
-      searchDescendants(totalDescendants[descendant],people);
+      transferAmount = 0;
+      for(let descendant in totalDescendants){
+        searchDescendants(totalDescendants[descendant],people);
+      }
     }
-  }
   displayPeople(totalDescendants);
 }
   
@@ -256,59 +267,14 @@ function addArraytoArray(originalArray, adderArray){
 
 
 function displayFamily(person, people){
-  let newArray = people.filter(function(el){
+ let family = [];
+ addArraytoArray(family, findParents(person,people));
+ addArraytoArray(family, findSiblings(person,people));
+ addArraytoArray(family, searchChildren(person,people));
+ family.push(findSpouse(person,people));
+ displayPeople(family);
 
-    for(let family in el.families){
-      if(el.families[family] == person.id){
-        return true;
-      }
-    }
-  });
-  alert(displayPeople(newArray));
-  return newArray;
 }
-
-function displayParent(people){
-  let parent = [];
-    for(let person in people){
-      parent.push(person.firstName); 
-      parent.push(person.lastName);
-    } 
-    alert(displayPeople(parent));
-    return parent;
-  }
-
-function displaySibling(people){
-  let sibling = [];
-    for(let person in people){
-      sibling.push(person.firstName); 
-      sibling.push(person.lastName);
-    } 
-    alert(displayPeople(sibling));
-    return sibling;
-  }
-
-function displaySpouse(people){
-  let spouse = [];
-    for(let person in people){
-      spouse.push(person.firstName); 
-      spouse.push(person.lastName);
-    } 
-    alert(displayPeople(spouse));
-    return spouse;
-  }
-
-function displayChildren(people){
-  let children = [];
-    for(let person in people){
-      children.push(person.firstName); 
-      children.push(person.lastName);
-    } 
-    alert(displayPeople(children));
-    return children;
-  }
-
-
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -325,4 +291,42 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+function searchChildren(person,people){
+  let newArray = people.filter(function(el){
+    
+    for(let parent in el.parents){
+      if(el.parents[parent] == person.id){
+        return true;
+      }
+    } 
+  });
+  return newArray;
+  }
+function findParents(person,people){
+  let newArray = [];
+  newArray = people.filter(function(el){
+    for( let parent in person.parents) {
+      if (el.id == person.parents[parent]){
+        return true;
+      }
+    }
+  });
+  return newArray
+}
+function findSpouse(person,people){
+  return people.filter(function(el){
+    if (el.id === person.currentspouse){
+      return true;
+    }
+
+  });
+}
+function findSiblings(person,people){
+  parents = findParents(person,people)
+  for (let parent in parents){
+    siblingsArray = searchChildren(parent,people)
+    siblingsArray.remove[person]
+    return siblingsArray
+  }
 }
