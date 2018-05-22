@@ -259,7 +259,7 @@ function displayFamily(person, people){
  addArraytoArray(family, findParents(person,people));
  addArraytoArray(family, findSiblings(person,people));
  addArraytoArray(family, searchChildren(person,people));
- family.push(findSpouse(person,people));
+ addArraytoArray(family, findSpouse(person,people));
  displayPeople(family);
 
 }
@@ -304,7 +304,7 @@ function findParents(person,people){
 }
 function findSpouse(person,people){
   return people.filter(function(el){
-    if (el.id === person.currentspouse){
+    if (el.id === person.currentSpouse){
       return true;
     }
 
@@ -313,8 +313,14 @@ function findSpouse(person,people){
 function findSiblings(person,people){
   parents = findParents(person,people)
   for (let parent in parents){
-    siblingsArray = searchChildren(parent,people)
-    siblingsArray.remove[person]
-    return siblingsArray
-  }
+    siblingsArray = searchChildren(parents[parent],people);
+    return removeSelf(person, siblingsArray)
+}
+function removeSelf(person,array){
+  return array.filter(function(el){
+    if (el.id != person.id){
+      return true;
+    }
+  });
+}
 }
