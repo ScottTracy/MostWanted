@@ -145,13 +145,36 @@ return newArray;
 
 function searchByAllTraits(people){
   let userInputAllTraits = prompt ("Please enter which traits to search by. Height, weight, eye color, gender, age, or occupation: ").toLowerCase();;
+  let newArray = people;
+  let traitArray = userInputAllTraits.split(",");
 
-  let newArray = people.filter(function (el) {
-    if(el.alltraits == userInputAllTraits) {
-      return true;
+  for(let trait in traitArray){
+    if(newArray.length == 1){
+      return newArray;
     }
-  });
-return newArray;
+    else if(traitArray[trait] == "height"){
+      newArray = searchByHeight(newArray);
+    }
+    else if(traitArray[trait] == "weight"){
+      newArray = searchByWeight(newArray);
+    }
+    else if(traitArray[trait] == "eyecolor"){
+      newArray = searchByEyeColor(newArray);
+    }
+    else if(traitArray[trait] == "gender"){
+      newArray = searchByGender(newArray);
+    }
+    else if(traitArray[trait] == "age"){
+      newArray = searchByAge(newArray);
+    }
+    else if(traitArray[trait] == "occupation"){
+      newArray = searchByOccupation(newArray);
+    }
+    else{
+      alert("You entered an invalid search type! Please try again.");
+    }
+    return newArray;
+  }
 }
 
 // Menu function to call once you find who you are looking for
