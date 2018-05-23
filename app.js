@@ -1,4 +1,4 @@
-
+console.log(new Date(getToday()))
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
@@ -16,7 +16,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'DOB', 'occupation', or 'all traits.'").toLowerCase();
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', or 'all traits.'").toLowerCase();
   let filteredPeople;
 
   switch(userSearchChoice) {
@@ -117,9 +117,10 @@ return newArray;
 }
 
 function searchByAge(people){
+  let today = getToday()
   let userInputAge = prompt ("What is their Age?").toLowerCase();
   let newArray = people.filter(function (el) {
-    if(timeDifference(getToday(),el.dob) == userInputAge) {
+    if(timeDifference(today,el.dob) == userInputAge) {
       return true;
     }
   });
@@ -128,21 +129,20 @@ return newArray;
 function getToday(){
   let today = new Date();
   let day = today.getDate();
-  let month = today.getMonth;
+  let month = today.getMonth() + 1;
   let year = today.getFullYear();
   if (day < 10) {
     day = '0' + day
   }
   if (month < 10){
-    month = '0' + day
+    month = '0' + month
   }
   today = month + "/"+ day + "/" + year
   return today
 }
 function timeDifference(today, pastDate){
-let timeDifference = Math.abs(today.getTime() - pastDate.getTime());
-let yearDifference = Math.floor(timeDifference/(1000 * 3600 * 24 * 365));
-return yearDifference
+difference = Math.floor(new Date(today).getTime() - new Date(pastDate).getTime());
+return Math.floor(difference / (1000 * 3600 * 24 * 365.25));
 }
 function searchByOccupation(people){
   let userInputOccupation = prompt ("What is their occupation?").toLowerCase();;
@@ -156,7 +156,7 @@ return newArray;
 }
 
 function searchByAllTraits(people){
-  let userInputAllTraits = prompt ("Please enter which traits to search by: height, weight, eye color, gender, age, or occupation: ").toLowerCase();;
+  let userInputAllTraits = prompt ("Please enter two or more traits to search by: height, weight, eye color, gender, age, or occupation: ").toLowerCase();;
   let newArray = people;
   userInputAllTraits = userInputAllTraits.replace(/\s/g,'');
   let traitArray = userInputAllTraits.split(",");
@@ -177,8 +177,8 @@ function searchByAllTraits(people){
     else if(traitArray[trait] == "gender"){
       newArray = searchByGender(newArray);
     }
-    else if(traitArray[trait] == "dob"){
-      newArray = searchByDob(newArray);
+    else if(traitArray[trait] == "age"){
+      newArray = searchByAge(newArray);
     }
     else if(traitArray[trait] == "occupation"){
       newArray = searchByOccupation(newArray);
