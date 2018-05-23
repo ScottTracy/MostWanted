@@ -32,8 +32,8 @@ function searchByTraits(people) {
       case "gender":
       filteredPeople = searchByGender(people);
       break;
-      case "dob":
-      filteredPeople = searchByDob(people);
+      case "age":
+      filteredPeople = searchByAge(people);
       break;
       case "occupation":
       filteredPeople = searchByOccupation(people);
@@ -116,17 +116,34 @@ function searchByGender(people){
 return newArray;
 }
 
-function searchByDob(people){
-  let userInputDob = prompt ("What is their DOB?").toLowerCase();;
-
+function searchByAge(people){
+  let userInputAge = prompt ("What is their Age?").toLowerCase();
   let newArray = people.filter(function (el) {
-    if(el.dob == userInputDob) {
+    if(timeDifference(getToday(),el.dob) == userInputAge) {
       return true;
     }
   });
 return newArray;
 }
-
+function getToday(){
+  let today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth;
+  let year = today.getFullYear();
+  if (day < 10) {
+    day = '0' + day
+  }
+  if (month < 10){
+    month = '0' + day
+  }
+  today = month + "/"+ day + "/" + year
+  return today
+}
+function timeDifference(today, pastDate){
+let timeDifference = Math.abs(today.getTime() - pastDate.getTime());
+let yearDifference = Math.floor(timeDifference/(1000 * 3600 * 24 * 365));
+return yearDifference
+}
 function searchByOccupation(people){
   let userInputOccupation = prompt ("What is their occupation?").toLowerCase();;
 
@@ -139,7 +156,7 @@ return newArray;
 }
 
 function searchByAllTraits(people){
-  let userInputAllTraits = prompt ("Please enter which traits to search by: height, weight, eye color, gender, DOB, or occupation: ").toLowerCase();;
+  let userInputAllTraits = prompt ("Please enter which traits to search by: height, weight, eye color, gender, age, or occupation: ").toLowerCase();;
   let newArray = people;
   userInputAllTraits = userInputAllTraits.replace(/\s/g,'');
   let traitArray = userInputAllTraits.split(",");

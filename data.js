@@ -22,7 +22,7 @@ const data = [
 		"height": 65,
 		"weight": 162,
 		"eyeColor": "brown",
-		"occupation": "assistant",76
+		"occupation": "assistant",
 		"parents": [],
 		"currentSpouse": 272822514
 	},
