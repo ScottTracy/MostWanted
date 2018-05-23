@@ -90,7 +90,7 @@ function searchByWeight(people) {
 function searchByEyeColor(people){
   let userInputEyeColor = prompt ("What is their eye color?").toLowerCase();;
   let newArray = people.filter(function (el) {
-    if(el.eyecolor == userInputEyeColor) {
+    if(el.eyeColor == userInputEyeColor) {
       return true;
     }
   });
