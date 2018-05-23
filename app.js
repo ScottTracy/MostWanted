@@ -6,7 +6,7 @@ function app(people){
     searchByName(people)
     break;
     case 'no':
-    searchByTraits(people);
+    searchByAllTraits(people);
     break;
     default:
     alert("You entered an invalid search type! Please try again.");
@@ -14,41 +14,6 @@ function app(people){
     break;
   }
 }
-
-function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', or 'all traits.'").toLowerCase();
-  let filteredPeople;
-  switch(userSearchChoice) {
-    case "height":
-      filteredPeople = searchByHeight(people);
-      break;
-      case "weight":
-      filteredPeople = searchByWeight(people);
-      break;
-      case "eye color":
-      filteredPeople = searchByEyeColor(people);
-      break;
-      case "gender":
-      filteredPeople = searchByGender(people);
-      break;
-      case "age":
-      filteredPeople = searchByAge(people);
-      break;
-      case "occupation":
-      filteredPeople = searchByOccupation(people);
-      break;
-      case "all traits":
-      filteredPeople = searchByAllTraits(people);
-      break;
-    default:
-      alert("You entered an invalid search type! Please try again.");
-      searchByTraits(people);
-      break;
-  }  
-  let foundPerson = filteredPeople[0];
-  mainMenu(foundPerson, people);
-}
-
 function searchByFirstName(firstName, people){
   let newArray = people.filter(function (el){
     if(el.firstName.toLowerCase() == firstName) {
@@ -150,7 +115,7 @@ return newArray;
 }
 
 function searchByAllTraits(people){
-  let userInputAllTraits = prompt ("Please enter two or more traits to search by: height, weight, eye color, gender, age, or occupation: ").toLowerCase();
+  let userInputAllTraits = prompt ("Please enter one or more traits to search by: height, weight, eye color, gender, age, or occupation: ").toLowerCase();
   let newArray = people;
   userInputAllTraits = userInputAllTraits.replace(/\s/g,'');
   let traitArray = userInputAllTraits.split(",");
@@ -184,7 +149,7 @@ function searchByAllTraits(people){
   }
   if (newArray.length > 1 ){
     alert("Returned more than one result.");
-    searchByAllTraits(newArray) 
+    searchByAllTraits(newArray); 
   }
   return newArray;
 }
