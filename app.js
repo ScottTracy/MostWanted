@@ -151,7 +151,8 @@ function searchByAllTraits(people){
     alert("Returned more than one result.");
     searchByAllTraits(newArray); 
   }
-  return newArray;
+  let foundPerson = newArray[0];
+  mainMenu(foundPerson, people);
 }
 
 function mainMenu(person, people){
