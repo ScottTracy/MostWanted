@@ -172,9 +172,9 @@ function searchByAllTraits(people){
     }
     else{
       alert("You entered an invalid search type! Please try again.");
-    }
-    return newArray;
+    }    
   }
+  return newArray;
 }
 
 // Menu function to call once you find who you are looking for
