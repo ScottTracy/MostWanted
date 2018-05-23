@@ -134,8 +134,8 @@ function getToday(){
 }
 
 function timeDifference(today, pastDate){
-difference = Math.floor(new Date(today).getTime() - new Date(pastDate).getTime());
-return Math.floor(difference / (1000 * 3600 * 24 * 365.25));
+let difference = Math.floor(new Date(today).getTime() - new Date(pastDate).getTime());
+return Math.floor(difference/ (1000 * 3600 * 24 * 365.25));
 }
 
 function searchByOccupation(people){
