@@ -176,9 +176,15 @@ function searchByAllTraits(people){
     else if(traitArray[trait] == "occupation"){
       newArray = searchByOccupation(newArray);
     }
+
     else{
       alert("You entered an invalid search type! Please try again.");
+      searchByAllTraits(newArray);
     }    
+  }
+  if (newArray.length > 1 ){
+    alert("Returned more than one result.");
+    searchByAllTraits(newArray) 
   }
   return newArray;
 }
